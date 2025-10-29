@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import "./Signup.css";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 const Signup = () => {
@@ -33,114 +35,148 @@ const Signup = () => {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-100 px-4">
-      <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-md">
-        <h1 className="text-3xl font-bold text-blue-600 text-center">Chronicare</h1>
-        <h2 className="mt-4 text-center text-xl font-medium text-gray-700">
-          Create your account
-        </h2>
+    <div className="signup-container">
+      {/* Left signup form */}
+      <div className="signup-left">
+        <div className="signup-card">
+          <h1 className="signup-title">Chronicare</h1>
+          <h2 className="signup-subtitle">Create your account</h2>
 
-        <form onSubmit={handleSignup} className="mt-6 space-y-4">
-          <input
-            name="firstName"
-            value={formData.firstName}
-            onChange={handleChange}
-            placeholder="First Name"
-            required
-            className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-600 focus:ring focus:ring-blue-200 outline-none"
-          />
-          <input
-            name="lastName"
-            value={formData.lastName}
-            onChange={handleChange}
-            placeholder="Last Name"
-            required
-            className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-600 focus:ring focus:ring-blue-200 outline-none"
-          />
-          <input
-            name="username"
-            value={formData.username}
-            onChange={handleChange}
-            placeholder="Username"
-            required
-            className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-600 focus:ring focus:ring-blue-200 outline-none"
-          />
-          <input
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            placeholder="Email"
-            type="email"
-            required
-            className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-600 focus:ring focus:ring-blue-200 outline-none"
-          />
-          <input
-            name="age"
-            value={formData.age}
-            onChange={handleChange}
-            placeholder="Age"
-            type="number"
-            required
-            className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-600 focus:ring focus:ring-blue-200 outline-none"
-          />
-          <input
-            name="gender"
-            value={formData.gender}
-            onChange={handleChange}
-            placeholder="Gender"
-            required
-            className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-600 focus:ring focus:ring-blue-200 outline-none"
-          />
-          <input
-            name="role"
-            value={formData.role}
-            onChange={handleChange}
-            placeholder="Role (e.g., Patient)"
-            required
-            className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-600 focus:ring focus:ring-blue-200 outline-none"
-          />
-          <input
-            name="phoneNumber"
-            value={formData.phoneNumber}
-            onChange={handleChange}
-            placeholder="Phone Number"
-            required
-            className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-600 focus:ring focus:ring-blue-200 outline-none"
-          />
-          <input
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            placeholder="Password"
-            type="password"
-            required
-            className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-600 focus:ring focus:ring-blue-200 outline-none"
-          />
-          <input
-            name="passwordConfirm"
-            value={formData.passwordConfirm}
-            onChange={handleChange}
-            placeholder="Confirm Password"
-            type="password"
-            required
-            className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-700 focus:ring focus:ring-blue-200 outline-none"
-          />
+          <form onSubmit={handleSignup} className="signup-form">
 
-          <button
-            type="submit"
-            className="w-full bg-blue-600 hover:bg-blue-600 text-white font-semibold py-2 rounded-md transition-colors"
-          >
-            Sign Up
-          </button>
+            {/* First Name & Last Name */}
+            <div className="flex gap-4">
+              <input
+                name="firstName"
+                value={formData.firstName}
+                onChange={handleChange}
+                placeholder="First Name"
+                required
+                className="signup-input flex-1"
+              />
+              <input
+                name="lastName"
+                value={formData.lastName}
+                onChange={handleChange}
+                placeholder="Last Name"
+                required
+                className="signup-input flex-1"
+              />
+            </div>
 
-          {message && <p className="text-center text-red-500 mt-2">{message}</p>}
-        </form>
+            {/* Username */}
+            <input
+              name="username"
+              value={formData.username}
+              onChange={handleChange}
+              placeholder="Username"
+              required
+              className="signup-input"
+            />
 
-        <p className="mt-6 text-center text-gray-600">
-          Already have an account?{" "}
-          <a href="/login" className="text-blue-600 font-semibold hover:underline">
-            Log In
-          </a>
+            {/* Email */}
+            <input
+              name="email"
+              type="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="Email"
+              required
+              className="signup-input"
+                        />
+
+                        {/* Age & Gender */}
+            <div className="flex gap-4">
+              <input
+                name="age"
+                type="number"
+                value={formData.age}
+                onChange={handleChange}
+                placeholder="Age"
+                required
+                className="signup-input flex-1"
+              />
+              <select
+                name="gender"
+                value={formData.gender}
+                onChange={handleChange}
+                required
+                className="signup-input flex-1"
+              >
+                <option value="" disabled selected hidden>Choose Gender</option>
+                <option value="Female">Female</option>
+                <option value="Male">Male</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            {/* Role */}
+            <select
+              name="role"
+              value={formData.role}
+              onChange={handleChange}
+              required
+              className="signup-input"
+            >
+              <option value="" disabled selected hidden>Choose Role</option>
+              <option value="Admin">Admin</option>
+              <option value="Patient">Patient</option>
+              <option value="Doctor">Doctor</option>
+              <option value="Caregiver">Caregiver</option>
+            </select>
+
+
+            {/* Phone */}
+            <input
+              name="phoneNumber"
+              value={formData.phoneNumber}
+              onChange={handleChange}
+              placeholder="Phone Number"
+              required
+              className="signup-input"
+            />
+
+            {/* Password */}
+            <input
+              name="password"
+              type="password"
+              value={formData.password}
+              onChange={handleChange}
+              placeholder="Password"
+              required
+              className="signup-input"
+            />
+
+            {/* Confirm Password */}
+            <input
+              name="passwordConfirm"
+              type="password"
+              value={formData.passwordConfirm}
+              onChange={handleChange}
+              placeholder="Confirm Password"
+              required
+              className="signup-input"
+            />
+
+            {/* Submit */}
+            <button type="submit" className="signup-button">Sign Up</button>
+            {message && <p className="signup-message">{message}</p>}
+          </form>
+
+          <p className="signup-text">
+            Already have an account?{" "}
+      
+            <a href="/login">Log In</a>
+          </p>
+        </div>
+      </div>
+
+      {/* Right welcome panel */}
+      <div className="signup-right">
+        <h1>Welcome to the Chronicare Family</h1>
+        <p>
+          Join thousands of patients and caregivers improving their healthcare journey with Chronicare. 
+          Manage medications, track symptoms, and stay connected—all in one place.
         </p>
       </div>
     </div>

@@ -1,5 +1,8 @@
-import React, { useState } from "react";
 
+import React, { useState } from "react";
+import "./Login.css";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -21,58 +24,54 @@ const Login = () => {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-100 px-4">
-      <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-md">
-        <h1 className="text-3xl font-bold text-blue-600 text-center">Chronicare</h1>
-        <h2 className="mt-4 text-center text-xl font-medium text-gray-700">Log in to your account</h2>
+    <div className="login-container">
+      {/* Left panel */}
+      <div className="login-left">
+        <h1>Welcome Back!</h1>
+        <p>Manage your health easily with Chronicare. Track medications, monitor progress, and stay connected with your caregivers and doctors.</p>
+      </div>
 
-        <form onSubmit={handleLogin} className="mt-6 space-y-4">
-          <div>
-            <label htmlFor="email" className="block text-gray-700 font-medium mb-1">
-              Email
-            </label>
-            <input
-              id="email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
-              required
-              className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-600 focus:ring focus:ring-blue-200 outline-none"
-            />
-          </div>
+      {/* Right panel - login form */}
+      <div className="login-right">
+        <div className="login-card">
+          <h1 className="login-title">Chronicare</h1>
+          <h2 className="login-subtitle">Log in to your account</h2>
 
-          <div>
-            <label htmlFor="password" className="block text-gray-700 font-medium mb-1">
-              Password
-            </label>
-            <input
-              id="password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter your password"
-              required
-              className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-600 focus:ring focus:ring-blue-200 outline-none"
-            />
-          </div>
+          <form onSubmit={handleLogin} className="login-form">
+            <div className="input-group">
+              <label htmlFor="email">Email</label>
+              <input
+                id="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your email"
+                required
+              />
+            </div>
 
-          <button
-            type="submit"
-            className="w-full bg-blue-800 hover:bg-blue-600 text-white font-semibold py-2 rounded-md transition-colors"
-          >
-            Log In
-          </button>
+            <div className="input-group">
+              <label htmlFor="password">Password</label>
+              <input
+                id="password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Enter your password"
+                required
+              />
+            </div>
 
-          {message && <p className="text-center text-red-500 mt-2">{message}</p>}
-        </form>
+            <button type="submit" className="login-button">Log In</button>
 
-        <p className="mt-6 text-center text-gray-600">
-          Don't have an account?{" "}
-          <a href="/signup" className="text-blue-600 font-semibold hover:underline">
-            Sign Up
-          </a>
-        </p>
+            {message && <p className="login-message">{message}</p>}
+          </form>
+
+          <p className="signup-text">
+            Don't have an account?{" "} 
+            <Link to="/Signup">Sign Up</Link>
+          </p>
+        </div>
       </div>
     </div>
   );
