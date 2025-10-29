@@ -6,17 +6,15 @@ import Login from "./components/Login.jsx";
 import Signup from "./components/Signup.jsx";
 import About from "./components/About.jsx";
 import ChatRoom from "./components/ChatRoom.jsx"
-// import Dashboard from "./components/Dashboard.jsx";
-// import PatientDashboard from "./components/PatientDashboard";
-// import DoctorDashboard from "./components/DoctorDashboard";
-// import CaregiverDashboard from "./components/CaregiverDashboard";
-// import AdminDashboard from "./components/AdminDashboard";
+import Profile from "./components/Profile.jsx"; 
+import Dashboard from "./components/Dashboard.jsx"; 
 import React from "react";
 
 
 function LayoutWrapper({ children }) {
   const location = useLocation();
   const noLayoutPages = ["/login", "/signup"];
+
 
   const hideLayout = noLayoutPages.includes(location.pathname);
 
@@ -40,7 +38,8 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/ChatRoom" element={<ChatRoom />} />
-            
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/dashboard" element={<Dashboard role="patient"/>} />
           </Routes>
         </LayoutWrapper>
       </Router>

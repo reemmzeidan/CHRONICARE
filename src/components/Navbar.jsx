@@ -9,8 +9,9 @@ const Navbar = () => {
       <ul className="flex space-x-6 text-gray-700 font-medium">
         <li className="hover:text-blue-600 cursor-pointer"><Link to="/" className="hover:text-blue-200 transition">Home</Link></li>
         <li className="hover:text-blue-600 cursor-pointer"><Link to="/Dashboard" className="hover:text-blue-200 transition">Dashboard</Link></li>
-        <li className="hover:text-blue-600 cursor-pointer">Features</li>
         <li className="hover:text-blue-600 cursor-pointer"><Link to="/ChatRoom" className="hover:text-blue-200 transition">ChatRoom</Link></li>
+        <li className="hover:text-blue-600 cursor-pointer"><Link to="/Profile" className="hover:text-blue-200 transition">Profile</Link></li>
+        
 
       </ul>
 

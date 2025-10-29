@@ -1,0 +1,204 @@
+/* Basic layout: sits under header; page uses header background so card appears below it */
+.profile-page-wrapper {
+  padding: 22px;
+  display: flex;
+  justify-content: center;
+}
+
+/* Card: match login/signup vibe (soft, rounded, centered) */
+.profile-card {
+  width: 100%;
+  max-width: 880px;
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 12px 30px rgba(12, 48, 70, 0.08);
+  overflow: hidden;
+  border: 1px solid rgba(11,111,164,0.06);
+  transform-origin: top center;
+  animation: cardIn 320ms ease;
+}
+
+/* subtle entrance for card */
+@keyframes cardIn {
+  from { transform: translateY(8px) scale(0.995); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+/* Header area (small top section) */
+.profile-header {
+  padding: 20px 26px;
+  background: linear-gradient(90deg, rgba(11,111,164,0.07), rgba(11,111,164,0.02));
+  border-bottom: 1px solid rgba(11,111,164,0.04);
+}
+.profile-header h1 {
+  margin: 0;
+  color: #0b6fa4;
+  font-size: 20px;
+  font-weight: 600;
+}
+.muted {
+  margin-top: 6px;
+  color: #6d8697;
+  font-size: 13px;
+}
+
+/* progress */
+.progress-wrap {
+  margin-top: 12px;
+}
+.progress {
+  width: 100%;
+  height: 8px;
+  background: rgba(11,111,164,0.06);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.progress-bar {
+  height: 8px;
+  background: linear-gradient(90deg, #0b6fa4, #18a8d1);
+  width: 0%;
+  transition: width 360ms ease;
+}
+.progress-steps {
+  display:flex;
+  gap:8px;
+  align-items:center;
+  margin-top:8px;
+}
+.dot {
+  width:26px; height:26px; border-radius:50%;
+  background:#f1f6f8;
+  display:flex; align-items:center; justify-content:center;
+  font-size:13px; color:#9aa8b2; border:1px solid rgba(11,111,164,0.03);
+}
+.dot.active {
+  background: linear-gradient(135deg,#0b6fa4,#2fb1d8);
+  color:white; box-shadow:0 6px 14px rgba(11,111,164,0.18);
+}
+
+/* form area holds panels */
+.profile-form-area {
+  padding: 18px 26px;
+  min-height: 300px;
+}
+
+/* panels and animations */
+.panel {
+  transition: transform 320ms ease, opacity 320ms ease;
+  opacity: 0;
+  transform: translateX(18px);
+}
+.panel.enter {
+  opacity: 1;
+  transform: translateX(0);
+}
+.panel.exit-left {
+  opacity: 0;
+  transform: translateX(-12px);
+}
+.panel.hidden { display:none; }
+
+/* simple grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+
+/* input style (like Login/Signup) */
+.profile-form-area input,
+.profile-form-area select {
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #e6eef3;
+  background: #fff;
+  box-shadow: none;
+  font-size: 14px;
+  transition: box-shadow 180ms ease, border 180ms ease, transform 180ms ease;
+}
+.profile-form-area input:focus,
+.profile-form-area select:focus {
+  outline: none;
+  border-color: #0b6fa4;
+  box-shadow: 0 6px 18px rgba(11,111,164,0.08);
+  transform: translateY(-2px);
+}
+
+/* vertical lists and rows */
+.vertical-list { margin-top: 12px; display:flex; flex-direction:column; gap:8px; }
+.row { display:flex; gap:8px; align-items:center; }
+.row input { flex:1; }
+.icon-btn {
+  border: none;
+  background: transparent;
+  color:#d9534f;
+  font-weight:700;
+  cursor:pointer;
+  padding:6px 8px;
+  border-radius:8px;
+  transition: background 150ms;
+}
+.icon-btn:hover { background: rgba(217,83,79,0.06); }
+
+/* medication row */
+.med-row { display:grid; grid-template-columns: 1fr 1fr 1fr 44px; gap:8px; align-items:center; }
+
+/* small subheading */
+.sub { margin-top: 14px; margin-bottom:6px; color:#7eb1c7; font-weight:600; }
+
+/* summary box */
+.summary {
+  margin-top: 12px;
+}
+.summary-box {
+  background: #f6fbfd;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 12px;
+  color:#234; max-height:140px; overflow:auto;
+}
+
+/* footer actions */
+.form-footer {
+  display:flex; align-items:center; justify-content:space-between;
+  padding: 14px 18px; border-top:1px solid rgba(11,111,164,0.04);
+}
+.back-btn, .next-btn, .save-btn {
+  padding:10px 16px; border-radius:10px; border:none; font-weight:600; cursor:pointer;
+}
+.back-btn { background:transparent; color:#345; border:1px solid rgba(11,111,164,0.06); }
+.next-btn {
+  background: #0b6fa4; color: white; box-shadow: 0 8px 18px rgba(11,111,164,0.12);
+}
+.next-btn.disabled { opacity:0.5; pointer-events:none; }
+.ghost-btn { background: transparent; border: 1px dashed rgba(11,111,164,0.09); padding:8px 12px; border-radius:8px; margin-top:8px; cursor:pointer; }
+
+/* save button similar to login CTA */
+.save-btn {
+  background: linear-gradient(90deg,#0b6fa4,#2285a9);
+  color:white; box-shadow:0 10px 20px rgba(11,111,164,0.12);
+}
+
+/* toast */
+.profile-toast {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  background: linear-gradient(90deg,#116694,#19a6d8);
+  color: white;
+  padding: 10px 14px;
+  border-radius: 10px;
+  transform: translateY(20px);
+  opacity: 0;
+  transition: all 250ms ease;
+  z-index: 9999;
+}
+.profile-toast.show { transform: translateY(0); opacity: 1; }
+
+/* responsive */
+@media (max-width: 720px) {
+  .grid { grid-template-columns: 1fr; }
+  .med-row { grid-template-columns: 1fr; }
+  .profile-card { margin: 0 14px; }
+}

@@ -1,9 +1,9 @@
-Container
+/* Container */
 .dashboard-container {
   display: flex;
   min-height: 100vh;
   font-family: 'Segoe UI', sans-serif;
-  background: #f0f8ff; /* soft light-blue background */
+  background: #f0f8ff;
 }
 
 /* Sidebar */
