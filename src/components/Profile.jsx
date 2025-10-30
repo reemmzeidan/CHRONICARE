@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Profile.css";
+import { getProfile } from "../api/profileApi";
+
 
 const emptyMedication = () => ({ name: "", dosage: "", frequency: "" });
 
