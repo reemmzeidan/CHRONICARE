@@ -1,35 +1,37 @@
-// import React from "react";
-
-// const Header = () => {
-//   return (
-//     <header className="flex flex-col justify-center items-center text-center h-[80vh] bg-linear-to-r from-blue-100 to-blue-200">
-//       <h2 className="text-4xl md:text-5xl font-bold mb-4 text-blue-700">
-//         Your Health, Simplified with Chronicare
-//       </h2>
-//       <p className="max-w-xl text-gray-600 mb-6">
-//         Manage your medications, track symptoms, and stay connected with your
-//         healthcare journey—all in one place.
-//       </p>
-//       <button className="px-6 py-3 bg-blue-600 text-white rounded-lg text-lg hover:bg-blue-700">
-//         Get Started
-//       </button>
-//     </header>
-//   );
-// };
-
-// export default Header;
-import React from "react";
+import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import "./Header.css"; // Import the CSS file
 
 const Header = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    setIsLoggedIn(!!token);
+
+    // Listen for token changes (login/logout in other tabs)
+    const handleStorageChange = () => {
+      const token = localStorage.getItem("token");
+      setIsLoggedIn(!!token);
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, []);
+
   return (
-    <header className="header">
-      <h2>Your Health, Simplified with Chronicare</h2>
+    <header className="header bg-header">
+      <h1>Your Health, Simplified with Chronicare</h1>
       <p>
         Manage your medications, track symptoms, and stay connected with your
         healthcare journey—all in one place.
       </p>
-      <button>Get Started</button>
+
+      {!isLoggedIn && (
+        <Link to="/signup">
+          <button className="btn-get-started">Get Started</button>
+        </Link>
+      )}
     </header>
   );
 };

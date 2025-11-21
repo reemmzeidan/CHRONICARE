@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "./Profile.css";
-import { getProfile } from "../api/profileApi";
-
+import axios from "axios";
 
 const emptyMedication = () => ({ name: "", dosage: "", frequency: "" });
 
 const Profile = () => {
-  // step management
   const [step, setStep] = useState(0);
 
-  // profile state
   const [profile, setProfile] = useState({
     name: "",
     age: "",
@@ -25,7 +22,6 @@ const Profile = () => {
   const [saving, setSaving] = useState(false);
   const steps = ["Personal", "Conditions", "Medications", "Emergency"];
 
-  // load saved mock data (localStorage)
   useEffect(() => {
     const saved = localStorage.getItem("chronicare_profile");
     if (saved) setProfile(JSON.parse(saved));
@@ -48,7 +44,7 @@ const Profile = () => {
   const removeFromArray = (field, idx) =>
     setProfile((p) => {
       const arr = p[field].filter((_, i) => i !== idx);
-      return { ...p, [field]: arr.length ? arr : ["" ] };
+      return { ...p, [field]: arr.length ? arr : [""] };
     });
 
   const updateMedication = (idx, key, value) =>
@@ -58,23 +54,20 @@ const Profile = () => {
       return { ...p, medications: meds };
     });
 
-  // navigation
   const next = () => {
     if (step < steps.length - 1) setStep((s) => s + 1);
-    else handleSave(); // last step -> save
+    else handleSave();
   };
 
   const back = () => {
     if (step > 0) setStep((s) => s - 1);
   };
 
-  // mock save -> localStorage (replace with axios PUT/POST later)
   const handleSave = () => {
     setSaving(true);
     setTimeout(() => {
       localStorage.setItem("chronicare_profile", JSON.stringify(profile));
       setSaving(false);
-      // simple success animation/toast:
       const toast = document.createElement("div");
       toast.innerText = "Profile saved successfully!";
       toast.className = "profile-toast";
@@ -87,7 +80,6 @@ const Profile = () => {
     }, 700);
   };
 
-  // small validation example (you can expand)
   const canProceed = () => {
     if (step === 0) return profile.name.trim().length > 0 && profile.age;
     return true;
@@ -118,7 +110,7 @@ const Profile = () => {
         </div>
 
         <div className="profile-form-area">
-          {/* Step panels */}
+          
           <div className={`panel ${step === 0 ? "enter" : "exit-left"}`}>
             <h2>Personal information</h2>
             <div className="grid">
@@ -157,6 +149,7 @@ const Profile = () => {
             </div>
           </div>
 
+         
           <div className={`panel ${step === 1 ? "enter" : step < 1 ? "hidden" : "exit-left"}`}>
             <h2>Health conditions</h2>
             <p className="muted">List diagnoses or chronic conditions</p>
@@ -168,7 +161,13 @@ const Profile = () => {
                     value={d}
                     onChange={(e) => updateArrayField("diseases", i, e.target.value)}
                   />
-                  <button className="icon-btn" onClick={() => removeFromArray("diseases", i)} type="button">✖</button>
+                  <button
+                    className="icon-btn"
+                    onClick={() => removeFromArray("diseases", i)}
+                    type="button"
+                  >
+                    ✖
+                  </button>
                 </div>
               ))}
             </div>
@@ -177,6 +176,7 @@ const Profile = () => {
             </button>
           </div>
 
+        
           <div className={`panel ${step === 2 ? "enter" : step < 2 ? "hidden" : "exit-left"}`}>
             <h2>Medications</h2>
             <p className="muted">Add meds, doses, and how often you take them</p>
@@ -198,32 +198,51 @@ const Profile = () => {
                     value={m.frequency}
                     onChange={(e) => updateMedication(i, "frequency", e.target.value)}
                   />
-                  <button className="icon-btn" onClick={() => {
-                    setProfile(p => ({ ...p, medications: p.medications.filter((_, idx)=> idx !== i) || [emptyMedication()] }));
-                  }} type="button">✖</button>
+                  <button
+                    className="icon-btn"
+                    onClick={() =>
+                      setProfile((p) => ({
+                        ...p,
+                        medications: p.medications.filter((_, idx) => idx !== i) || [emptyMedication()],
+                      }))
+                    }
+                    type="button"
+                  >
+                    ✖
+                  </button>
                 </div>
               ))}
             </div>
-            <div className="med-actions">
-              <button className="ghost-btn" onClick={() => setProfile(p => ({ ...p, medications: [...p.medications, emptyMedication()] }))} type="button">
-                + Add medication
-              </button>
+            <button
+              className="ghost-btn"
+              onClick={() => setProfile((p) => ({ ...p, medications: [...p.medications, emptyMedication()] }))}
+              type="button"
+            >
+              + Add medication
+            </button>
 
-              <h3 className="sub">Allergies</h3>
-              <div className="vertical-list">
-                {profile.allergies.map((a, i) => (
-                  <div className="row" key={i}>
-                    <input placeholder={`Allergy ${i + 1}`} value={a} onChange={(e) => updateArrayField("allergies", i, e.target.value)} />
-                    <button className="icon-btn" onClick={() => removeFromArray("allergies", i)} type="button">✖</button>
-                  </div>
-                ))}
-              </div>
-              <button className="ghost-btn" onClick={() => addToArray("allergies", "")} type="button">
-                + Add allergy
-              </button>
+            
+            <h3 className="sub">Allergies</h3>
+            <div className="vertical-list">
+              {profile.allergies.map((a, i) => (
+                <div className="row" key={i}>
+                  <input
+                    placeholder={`Allergy ${i + 1}`}
+                    value={a}
+                    onChange={(e) => updateArrayField("allergies", i, e.target.value)}
+                  />
+                  <button className="icon-btn" onClick={() => removeFromArray("allergies", i)} type="button">
+                    ✖
+                  </button>
+                </div>
+              ))}
             </div>
+            <button className="ghost-btn" onClick={() => addToArray("allergies", "")} type="button">
+              + Add allergy
+            </button>
           </div>
 
+         
           <div className={`panel ${step === 3 ? "enter" : step < 3 ? "hidden" : "exit-left"}`}>
             <h2>Emergency contact</h2>
             <div className="grid">
@@ -243,9 +262,57 @@ const Profile = () => {
               />
             </div>
 
+            
             <div className="summary">
               <h3>Summary (preview)</h3>
-              <pre className="summary-box">{JSON.stringify(profile, null, 2)}</pre>
+              <div className="summary-box">
+                {profile.name.trim() && <p><strong>Name:</strong> {profile.name}</p>}
+                {profile.age && <p><strong>Age:</strong> {profile.age}</p>}
+                {profile.gender && <p><strong>Gender:</strong> {profile.gender}</p>}
+                {profile.weight && <p><strong>Weight:</strong> {profile.weight} kg</p>}
+                {profile.height && <p><strong>Height:</strong> {profile.height} cm</p>}
+
+                {profile.diseases.filter(d => d.trim() !== "").length > 0 && (
+                  <>
+                    <p><strong>Health Conditions:</strong></p>
+                    <ul>
+                      {profile.diseases.filter(d => d.trim() !== "").map((d, i) => <li key={i}>{d}</li>)}
+                    </ul>
+                  </>
+                )}
+
+                {profile.medications.filter(m => m.name.trim() !== "").length > 0 && (
+                  <>
+                    <p><strong>Medications:</strong></p>
+                    <ul>
+                      {profile.medications
+                        .filter(m => m.name.trim() !== "")
+                        .map((m, i) => (
+                          <li key={i}>
+                            {`${m.name}${m.dosage ? ` - ${m.dosage}` : ""}${m.frequency ? ` - ${m.frequency}` : ""}`}
+                          </li>
+                        ))}
+                    </ul>
+                  </>
+                )}
+
+                {profile.allergies.filter(a => a.trim() !== "").length > 0 && (
+                  <>
+                    <p><strong>Allergies:</strong></p>
+                    <ul>
+                      {profile.allergies.filter(a => a.trim() !== "").map((a, i) => <li key={i}>{a}</li>)}
+                    </ul>
+                  </>
+                )}
+
+                {(profile.emergencyContact.name || profile.emergencyContact.phone) && (
+                  <>
+                    <p><strong>Emergency Contact:</strong></p>
+                    {profile.emergencyContact.name && <p>Name: {profile.emergencyContact.name}</p>}
+                    {profile.emergencyContact.phone && <p>Phone: {profile.emergencyContact.phone}</p>}
+                  </>
+                )}
+              </div>
             </div>
           </div>
         </div>
@@ -257,7 +324,11 @@ const Profile = () => {
 
           <div className="actions">
             {step < steps.length - 1 && (
-              <button className={`next-btn ${!canProceed() ? "disabled" : ""}`} onClick={next} disabled={!canProceed()}>
+              <button
+                className={`next-btn ${!canProceed() ? "disabled" : ""}`}
+                onClick={next}
+                disabled={!canProceed()}
+              >
                 Next →
               </button>
             )}

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "./Signup.css";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 import axios from "axios";
 
 const Signup = () => {
@@ -18,6 +20,8 @@ const Signup = () => {
   });
 
   const [message, setMessage] = useState("");
+  const navigate = useNavigate();
+
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -29,6 +33,7 @@ const Signup = () => {
       const res = await axios.post("http://localhost:3000/api/auth/signup", formData);
       setMessage(res.data.message);
       console.log("Token:", res.data.token);
+       navigate("/profile");
     } catch (err) {
       setMessage(err.response?.data?.message || "Something went wrong");
     }
@@ -119,7 +124,6 @@ const Signup = () => {
               className="signup-input"
             >
               <option value="" disabled selected hidden>Choose Role</option>
-              <option value="Admin">Admin</option>
               <option value="Patient">Patient</option>
               <option value="Doctor">Doctor</option>
               <option value="Caregiver">Caregiver</option>

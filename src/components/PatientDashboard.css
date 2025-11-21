@@ -1,93 +1,43 @@
-Container
-.dashboard-container {
-  display: flex;
+.patient-container {
+  background: #0a1a2f;
+  color: white;
+  padding: 20px;
   min-height: 100vh;
-  font-family: 'Segoe UI', sans-serif;
-  background: #f0f8ff; /* soft light-blue background */
 }
 
-/* Sidebar */
-.sidebar {
-  width: 220px;
-  background: linear-gradient(to bottom, #87cefa, #b0e0e6);
-  padding: 2rem 1rem;
-  display: flex;
-  flex-direction: column;
-  color: #fff;
-}
-.sidebar-title {
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-bottom: 2rem;
-}
-.sidebar-menu li {
-  list-style: none;
-  margin: 1rem 0;
-  font-size: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-.sidebar-menu li:hover, .sidebar-menu li.active {
-  transform: scale(1.05);
-  color: #fff8dc;
-}
-
-/* Main content */
-.main-content {
-  flex: 1;
-  padding: 2rem;
-}
-
-/* Header */
-.dashboard-header h1 {
-  font-size: 2rem;
-  color: #333;
-  margin-bottom: 0.3rem;
-}
-.dashboard-header p {
-  color: #666;
-}
-
-/* Stats cards */
-.stats-cards {
-  display: flex;
-  gap: 1rem;
-  margin: 2rem 0;
-  flex-wrap: wrap;
-}
 .card {
-  flex: 1;
-  min-width: 150px;
-  background: #fff;
-  border-radius: 1rem;
-  padding: 1rem;
-  text-align: center;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
-}
-.card-icon {
-  font-size: 2rem;
-  color: #1e90ff;
-  margin-bottom: 0.5rem;
+  background: #11243f;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
 }
 
-/* Other sections */
-.other-sections {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+textarea, input {
+  width: 100%;
+  padding: 10px;
+  background: #0e1d33;
+  border: 1px solid #345;
+  border-radius: 8px;
+  color: white;
 }
-.section {
-  background: #fff;
-  padding: 1rem;
-  border-radius: 1rem;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  min-height: 100px;
+
+button {
+  background: #1d90f5;
+  margin-top: 10px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+}
+
+.chart-placeholder {
+  background: #0e1d33;
+  height: 200px;
+  margin-top: 15px;
+  border-radius: 10px;
+}
+
+.emergency button {
+  background: #ff3b3b;
 }

@@ -1,26 +1,26 @@
-/* Container - split screen */
+
 .login-container {
   display: flex;
   min-height: 100vh;
   overflow: hidden;
 }
 
-/* Left panel wrapper to match login panel background */
+
 .login-left-wrapper {
   flex: 1;
-  background: linear-gradient(135deg, #dbeafe, #bfdbfe); /* same as login panel */
+  background: linear-gradient(135deg, #dbeafe, #bfdbfe); 
   display: flex;
 }
 
-/* Left panel - Welcome message */
+
 .login-left {
   flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 60px;
-  color: #f0f9ff; /* light text */
-  background: linear-gradient(135deg, #1e40af, #1e3a8a); /* dark welcome panel */
+  color: #f0f9ff;
+  background: linear-gradient(135deg, #1e40af, #1e3a8a);
   border-top-right-radius: 80px;
   border-bottom-right-radius: 80px;
   animation: slideLeft 1s ease forwards;
@@ -38,17 +38,17 @@
   opacity: 0.95;
 }
 
-/* Right panel - login form */
+
 .login-right {
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 40px;
-  background: linear-gradient(135deg, #dbeafe, #bfdbfe); /* lightened blue background */
+  background: linear-gradient(135deg, #dbeafe, #bfdbfe); 
 }
 
-/* Login card */
+
 .login-card {
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
@@ -68,7 +68,7 @@
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
 }
 
-/* Titles */
+
 .login-title {
   font-size: 2.8rem;
   font-weight: 700;
@@ -85,7 +85,7 @@
   opacity: 0.9;
 }
 
-/* Form */
+
 .login-form .input-group {
   display: flex;
   flex-direction: column;
@@ -113,7 +113,7 @@
   box-shadow: 0 0 8px rgba(37, 99, 235, 0.25);
 }
 
-/* Button */
+
 .login-button {
   width: 100%;
   padding: 14px;
@@ -134,7 +134,7 @@
   background: linear-gradient(135deg, #1d4ed8, #2563eb);
 }
 
-/* Message */
+
 .login-message {
   color: #dc2626;
   margin-top: 10px;
@@ -142,7 +142,7 @@
   animation: fadeInText 0.8s ease forwards;
 }
 
-/* Signup text */
+
 .signup-text {
   margin-top: 25px;
   font-size: 0.95rem;
@@ -161,7 +161,7 @@
   color: #1d4ed8;
 }
 
-/* Animations */
+
 @keyframes bgPulse {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
@@ -183,7 +183,7 @@
   to { opacity: 1; transform: translateX(0); }
 }
 
-/* Responsive */
+
 @media (max-width: 768px) {
   .login-container {
     flex-direction: column;
